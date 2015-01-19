@@ -1,6 +1,4 @@
 import dns.zone
-from dns.zone import NoSOA
-from dns.exception import DNSException
 from dns.rdataclass import *
 from dns.rdatatype import *
 from dns import rdatatype
