@@ -17,3 +17,5 @@ alternatively run:
 python sync_dns.py domainname
 ```
 to do an intelligent sync of just that domain.
+4. Check your DO DNS entries to make sure it's correct then set your nameservers to ns1.digitalocean.com, 
+ns2.digitalocean.com and ns3.digitalocean.com
