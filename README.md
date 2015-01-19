@@ -4,7 +4,7 @@ have a droplet with domain management tools already on it. This python script wi
 droplet running BIND with DigitalOcean's DNS servers. It removes the need for running 2 droplets to run your 
 own 2-nameserver setup and also means you get to take advantage of DO's far better DNS infrastructure.
 
-Usage:
+##Usage##
 
 1. sudo pip install requests
 2. Create a settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
@@ -15,3 +15,7 @@ for extra domains if you wish. Or alternatively run:```python sync_dns.py domain
 just that domain.
 4. Check your DO DNS entries to make sure it's correct then set your nameservers to ns1.digitalocean.com, 
 ns2.digitalocean.com and ns3.digitalocean.com
+
+##Credit##
+
+Initial inspiration came from here https://cloud.google.com/dns/migrating-bind-zone-python
