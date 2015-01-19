@@ -16,8 +16,8 @@ http://docs.python-requests.org/en/latest/.
 2. Create a settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
 2 variables: ip is the IP address of the server you are syncing and auth_token is your DigitalOcean API Personal Access
 Token.
-3. Either run:```python sync_dns.py``` to do a complete wipe of all zones that are on the server and a re-sync from 
-scratch. It won't wipe domains from DigitalOcean's DNS it doesn't find on the server so you are free to use DO's DNS 
+3. Either run:```python sync_dns.py``` to do a complete wipe of DO's records for all domains that are on the droplet and
+re-sync from scratch. It won't wipe domains from DO's DNS it doesn't find on the server so you are free to use it 
 for extra domains if you wish. Or alternatively run:```python sync_dns.py domainname```to do an intelligent sync of 
 just that domain.
 4. Check your DO DNS entries to make sure it's correct then set your nameservers to ns1.digitalocean.com, 
