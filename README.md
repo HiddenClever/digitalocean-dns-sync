@@ -1,8 +1,11 @@
 # DigitalOcean DNS Synchronisation
 DigitalOcean offers a fantastic DNS service and API but it is time consuming and cumbersome to manually update it if you 
-have a droplet with domain management tools already on it. This python script will synchronise the DNS records from any 
-droplet running BIND with DigitalOcean's DNS servers. It removes the need for running 2 droplets to run your 
-own 2-nameserver setup and also means you get to take advantage of DO's far better DNS infrastructure.
+have a droplet with a control panel on it that generates DNS records as part of domain management (e.g. cPanel, 
+DirectAdmin etc).
+
+This python script will synchronise the DNS records from any droplet running BIND with DigitalOcean's 
+DNS servers. It removes the need for running 2 droplets to run your own 2-nameserver setup and also means you get to 
+take advantage of DO's far better DNS infrastructure.
 
 ###Usage###
 
