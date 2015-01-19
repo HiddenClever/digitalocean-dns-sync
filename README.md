@@ -4,8 +4,8 @@ have a droplet with a control panel on it that generates DNS records as part of 
 DirectAdmin etc).
 
 This python script will synchronise the DNS records from any droplet running BIND with DigitalOcean's 
-DNS servers. It removes the need for running 2 droplets to run your own 2-nameserver setup and also means you get to 
-take advantage of DO's far better DNS infrastructure.
+DNS servers. It removes the need for 2 droplets to run your own 2-nameserver setup and also means you get to take 
+advantage of DO's far better DNS infrastructure.
 
 ###Usage###
 
@@ -17,7 +17,9 @@ scratch. It won't wipe domains from DigitalOcean's DNS it doesn't find on the se
 for extra domains if you wish. Or alternatively run:```python sync_dns.py domainname```to do an intelligent sync of 
 just that domain.
 4. Check your DO DNS entries to make sure it's correct then set your nameservers to ns1.digitalocean.com, 
-ns2.digitalocean.com and ns3.digitalocean.com
+ns2.digitalocean.com and ns3.digitalocean.com or follow this tutorial 
+https://www.digitalocean.com/community/tutorials/how-to-create-vanity-or-branded-nameservers-with-digitalocean-cloud-servers 
+to brand your own nameservers.
 
 ###Credit###
 
