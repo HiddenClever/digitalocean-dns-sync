@@ -1,4 +1,4 @@
-# DigitalOcean DNS Synchronisation
+# DigitalOcean DNS Sync
 DigitalOcean offers a fantastic DNS service but it is time consuming and cumbersome to manually update it if you 
 have a droplet running a control panel that generates DNS records as part of domain management (e.g. cPanel, 
 DirectAdmin etc).
@@ -9,7 +9,7 @@ advantage of DO's far better DNS infrastructure.
 
 ###Usage###
 
-1. Generate a personal access token from https://cloud.digitalocean.com/settings/applications if you haven't got one 
+1. Generate a Personal Access Token from https://cloud.digitalocean.com/settings/applications if you haven't got one 
  already.
 2. Run ```sudo pip install requests``` or install the Python Requests library however you would normally 
  http://docs.python-requests.org/en/latest/.
