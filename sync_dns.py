@@ -13,6 +13,7 @@ try:
 except ImportError:
     print >>sys.stderr, "[ERROR] You must create a settings file containing both the IP of the server you are " \
                         "synchronising and your DigitalOcean API Personal Access Token."
+    exit()
 
 
 base_url = "https://api.digitalocean.com/v2/domains"
