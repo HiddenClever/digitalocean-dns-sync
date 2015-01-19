@@ -1,11 +1,14 @@
-# digitalocean-dns-sync
-Python script to synchronise the DNS records from any server running BIND with DigitalOcean's DNS servers.
+# DigitalOcean DNS Synchronisation
+DigitalOcean offers a fantastic DNS service and API but it is time consuming and cumbersome to update it if you have
+a droplet with domain management tools already on it. This python script will synchronise the DNS records from any 
+server running BIND with DigitalOcean's DNS servers. It removes the need for running 2 droplets to run your own
+2-nameserver setup and also means you get to take advantage of DO's far better DNS infrastructure.
 
 Usage:
 
 1. sudo pip install requests
 2. Create a settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
-2 variables: ip is the IP address of the server you are syncing an auth_token is your DigitalOcean API token.
+2 variables: ip is the IP address of the server you are syncing and auth_token is your DigitalOcean API token.
 3. Either run:
 ```
 python sync_dns.py
