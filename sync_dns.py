@@ -221,4 +221,3 @@ if __name__ == '__main__':
     else:
         print "You have supplied too many arguments. Please either pass in a domain name or leave the " \
               "arguments blank to synchronise all domains in the system."
-        # If no domain passed in, give warning message of "this will sync all domains, continue?"
