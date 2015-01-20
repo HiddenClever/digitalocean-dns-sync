@@ -28,7 +28,7 @@ if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_create_post.sh
 fi
-echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
+echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain at now + 2 minutes" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
 #echo "--> Done"
 
 #if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
