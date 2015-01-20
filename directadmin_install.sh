@@ -24,19 +24,19 @@ cp sync_dns_settings.py /usr/local/directadmin/scripts/custom/
 echo "--> Done"
 
 echo $'\n'"Creating DirectAdmin custom scripts"
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_post_create.sh ]; then
-  # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_post_create.sh
-fi
-echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain" >> /usr/local/directadmin/scripts/custom/domain_post_create.sh
-echo "--> Done"
-
 if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_post_create.sh
+  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_create_post.sh
 fi
-echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain at now + 2 minutes" >> /usr/local/directadmin/scripts/custom/domain_post_create.sh
-echo "--> Done"
+echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
+#echo "--> Done"
+
+#if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
+#  # If the script doesn't exist, create the header
+#  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_post_create.sh
+#fi
+#echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain at now + 2 minutes" >> /usr/local/directadmin/scripts/custom/domain_post_create.sh
+#echo "--> Done"
 
 echo $'\n'"Setting permissions"
 chown -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
