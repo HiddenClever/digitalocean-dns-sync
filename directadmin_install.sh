@@ -24,23 +24,29 @@ cp sync_dns_settings.py /usr/local/directadmin/scripts/custom/
 echo "--> Done"
 
 echo $'\n'"Creating DirectAdmin custom scripts"
-#if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
-#  # If the script doesn't exist, create the header
-#  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_create_post.sh
-#fi
-#echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"Domain records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
+if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
+  # If the script doesn't exist, create the header
+  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_create_post.sh
+fi
+echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
+
+if [ ! -f /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh ]; then
+  # If the script doesn't exist, create the header
+  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh
+fi
+echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh
 
 if [ ! -f /usr/local/directadmin/scripts/custom/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/dns_write_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"Domain records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/dns_write_post.sh
+echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/dns_write_post.sh
 
-#if [ ! -f /usr/local/directadmin/scripts/custom/domain_post_create.sh ]; then
-#  # If the script doesn't exist, create the header
-#  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_post_create.sh
-#fi
-#echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain at now + 2 minutes" >> /usr/local/directadmin/scripts/custom/domain_post_create.sh
+if [ ! -f /usr/local/directadmin/scripts/custom/subdomain_create_post.sh ]; then
+  # If the script doesn't exist, create the header
+  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/subdomain_create_post.sh
+fi
+echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/subdomain_create_post.sh
 
 echo "--> Done"
 
