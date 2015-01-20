@@ -87,7 +87,7 @@ def sync_zone(domain_records_url, domain):
     print "\nSynchronising DNS zone for", domain, "..."
 
     # First get all the existing records
-    existing_records = requests.get(domain_records_url, headers=headers).json().get('domain_records', [])
+    existing_records = requests.get(domain_records_url+"?per_page=9999", headers=headers).json().get('domain_records', [])
 
     # Create an array to hold synchronised record IDs
     synced_record_ids = []
