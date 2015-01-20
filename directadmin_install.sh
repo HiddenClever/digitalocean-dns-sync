@@ -40,4 +40,5 @@ echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\"
 
 echo $'\n'"Setting permissions"
 chown -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
+chmod -R +x /usr/local/directadmin/scripts/custom/*.sh
 echo "--> Done"
