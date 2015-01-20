@@ -9,7 +9,7 @@ import os.path
 import sys
 
 try:
-    from settings import ip, auth_token
+    from sync_dns_settings import ip, auth_token
 except ImportError:
     print >>sys.stderr, "[ERROR] You must create a settings file containing both the IP of the server you are " \
                         "synchronising and your DigitalOcean API Personal Access Token."

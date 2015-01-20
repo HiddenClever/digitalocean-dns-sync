@@ -13,7 +13,7 @@ advantage of DO's far better DNS infrastructure.
  already.
 2. Run ```sudo pip install requests``` or install the Python Requests library however you would normally 
  http://docs.python-requests.org/en/latest/.
-3. Create a settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
+3. Create a sync_dns_settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
  2 variables: ip is the IP address of the server you are syncing and auth_token is your DigitalOcean API Personal Access
  Token.
 4. Either run: ```python sync_dns.py``` to do a complete wipe of DO's records for all domains that are on the droplet and

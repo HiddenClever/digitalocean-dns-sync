@@ -54,4 +54,4 @@ docs/_build/
 target/
 
 # Project-specific files
-settings.py
+sync_dns_settings.py
