@@ -189,7 +189,13 @@ def wipe_zone(domain_records_url):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
+    args = sys.argv
+    if "--delete" in args:
+        args.remove("--delete")
+        delete = True
+    else:
+        delete = False
+    if len(args) == 1:
         print "You have not specified a domain, would you like to wipe and re-sync all domains in the system?"
         sync_all = raw_input("Please type y or n: ")
         if sync_all == "y":
@@ -213,11 +219,21 @@ if __name__ == '__main__':
                 sync_zone(domain_records_url, domain)
         else:
             exit()
-    elif len(sys.argv) == 2:
-        domain_url = base_url + "/{}".format(sys.argv[1])
-        domain_records_url = "{}/records".format(domain_url)
-        check_domain(domain_records_url, sys.argv[1])
-        sync_zone(domain_records_url, sys.argv[1])
+    elif len(args) == 2:
+        domain_url = base_url + "/{}".format(args[1])
+        if delete:
+            print "\nDeleting", args[1], "..."
+            response = requests.delete(domain_url, headers=headers)
+            if response.status_code == 204:
+                print "--> Done"
+            else:
+                handle_error(response)
+        else:
+            domain_records_url = "{}/records".format(domain_url)
+            check_domain(domain_records_url, args[1])
+            sync_zone(domain_records_url, args[1])
     else:
-        print "You have supplied too many arguments. Please either pass in a domain name or leave the " \
-              "arguments blank to synchronise all domains in the system."
+        print "You have supplied too many arguments. Usage:"
+        print "python sync_dns.py will wipe and re-sync all DNS records in the droplet"
+        print "python sync_dns.py domainname will do an intelligent sync of just that domain"
+        print "python sync_dns.py domainname --delete will delete the domain record"
