@@ -80,4 +80,4 @@ chown -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
 chmod -R +x /usr/local/directadmin/scripts/custom/*.sh
 echo "--> Done"
 
-echo $'\n\n'"--> DirectAdmin-DigitalOcean DNS Sync Installation Complete"$'\n'
+echo $'\n\n'"DirectAdmin-DigitalOcean DNS Sync Installation Complete"$'\n'
