@@ -40,7 +40,7 @@ if [ ! -f /usr/local/directadmin/scripts/custom/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/dns_write_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 2 minutes > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/dns_write_post.sh
+echo "python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\ > log 2>&1"$'\n'"echo \"DNS records will sync in 2 minutes\"" >> /usr/local/directadmin/scripts/custom/dns_write_post.sh
 
 if [ ! -f /usr/local/directadmin/scripts/custom/subdomain_create_post.sh ]; then
   # If the script doesn't exist, create the header
