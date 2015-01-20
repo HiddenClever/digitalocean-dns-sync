@@ -78,6 +78,8 @@ def check_domain(domain_records_url, domain):
 
             # Wipe the default DigitalOcean records
             wipe_zone(domain_records_url)
+        else:
+            handle_error(response)
     else:
         handle_error(response)
 
