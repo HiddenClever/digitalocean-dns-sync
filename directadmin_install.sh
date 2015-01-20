@@ -32,5 +32,5 @@ echo "python /usr/local/directadmin/scripts/custom/digitalocean-dns-sync/sync_dn
 echo "--> Done"
 
 echo $'\n'"Setting permissions"
-chmod -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
+chown -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
 echo "--> Done"
