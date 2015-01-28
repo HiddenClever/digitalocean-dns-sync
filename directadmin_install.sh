@@ -18,7 +18,7 @@ if [ ! -f sync_dns_settings.py ]; then
   #echo $auth_token
 fi
 
-echo $'\n'"Installing scripts"
+echo $'\n'"Installing sync scripts"
 cp sync_dns.py /usr/local/directadmin/scripts/custom/
 cp sync_dns_settings.py /usr/local/directadmin/scripts/custom/
 echo "--> Done"

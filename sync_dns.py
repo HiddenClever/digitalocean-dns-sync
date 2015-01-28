@@ -181,13 +181,16 @@ def wipe_zone(domain_records_url):
 
     response = requests.get(domain_records_url, headers=headers).json()
     # print "Response body:", json.dumps(response, indent=4, sort_keys=True)
-    for record in response['domain_records']:
-        response = requests.delete("{}/{}".format(domain_records_url, record["id"]), headers=headers)
-        if response.status_code == 204:
-            print "--> Deleted record", record["type"], record["data"]
-        else:
-            handle_error(response)
-    print "--> Done"
+    if 'domain_records' in response:
+        for record in response['domain_records']:
+            response = requests.delete("{}/{}".format(domain_records_url, record["id"]), headers=headers)
+            if response.status_code == 204:
+                print "--> Deleted record", record["type"], record["data"]
+            else:
+                handle_error(response)
+        print "--> Done"
+    else:
+        handle_error(response)
 
 
 if __name__ == '__main__':
