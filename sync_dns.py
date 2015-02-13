@@ -33,7 +33,7 @@ def handle_error(response):
             return
         elif response.status_code == 429:
             msg = "\n[ERROR] You have exceeded DigitalOcean's Rate Limit of 1200 requests per hour. " \
-                  "Please wait before trying again."
+                  "Please wait an hour before trying again and type the last domain synchronised when prompted."
 
     if msg is None:
         msg = "\n[ERROR] An unknown error has occurred, please re-run the script."
@@ -203,8 +203,8 @@ if __name__ == '__main__':
     if len(args) == 1:
         print "You have not specified a domain, would you like to wipe and re-sync all domains in the system?"
         sync_all = raw_input("Please type y or n: ")
-        resume_domain = raw_input("Did you run this previously and reach the DigitalOcean API limit? If so type "
-                                  "domain name here to resume: ")
+        print "Did you run this previously and reach the DigitalOcean API limit?"
+        resume_domain = raw_input("If so type the last domain name here to resume: ")
         if sync_all == "y":
             found = False
             for filename in sorted(glob.glob("/etc/bind/*.db")):
