@@ -203,11 +203,20 @@ if __name__ == '__main__':
     if len(args) == 1:
         print "You have not specified a domain, would you like to wipe and re-sync all domains in the system?"
         sync_all = raw_input("Please type y or n: ")
+        resume_domain = raw_input("Did you run this previously and reach the DigitalOcean API limit? If so type "
+                                  "domain name here to resume: ")
         if sync_all == "y":
+            found = False
             for filename in sorted(glob.glob("/etc/bind/*.db")):
                 domain = os.path.basename(filename)[:-3]
                 domain_url = base_url + "/{}".format(domain)
                 domain_records_url = "{}/records".format(domain_url)
+
+                if resume_domain:
+                    if resume_domain == domain:
+                        found = True
+                    if not found:
+                        continue
 
                 # 1. Delete the domain. We do this because it is quicker than wiping each record individually.
                 print "\nDeleting", domain, "..."
