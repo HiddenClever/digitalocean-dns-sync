@@ -18,7 +18,7 @@ except ImportError:
 
 base_url = "https://api.digitalocean.com/v2/domains"
 
-headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(auth_token)}
+headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer {0}'.format(auth_token)}
 
 
 def handle_error(response):
@@ -95,10 +95,10 @@ def sync_zone(domain_records_url, domain):
     synced_record_ids = []
 
     # Get the BIND raw DNS dump
-    with open("/etc/bind/{}.db".format(domain), "r") as dns_file:
+    with open("/etc/bind/{0}.db".format(domain), "r") as dns_file:
         dns_dump = dns_file.read()
 
-    dns_dump = "$ORIGIN {}.\n{}".format(domain, dns_dump)
+    dns_dump = "$ORIGIN {0}.\n{1}".format(domain, dns_dump)
 
     zone = dns.zone.from_text(dns_dump)
 
@@ -124,7 +124,7 @@ def sync_zone(domain_records_url, domain):
                 elif rset.rdtype == NS:
                     value = unicode(rdata.target)
                 elif rset.rdtype == TXT:
-                    value = " ".join('"{}"'.format(string) for string in rdata.strings)
+                    value = " ".join('"{0}"'.format(string) for string in rdata.strings)
                 if value:
                     print "--> Priority:", priority
                     print "--> Value:", value
@@ -138,7 +138,7 @@ def sync_zone(domain_records_url, domain):
                         if type == "NS":
                             data = data[:-1]
                         elif type in ["CNAME", "MX"]:
-                            data = "{}.{}".format(data, domain)
+                            data = "{0}.{1}".format(data, domain)
                         if record['name'] == name and record['type'] == type and record['data'] == data:
                             record_id = record['id']
                             synced_record_ids.append(record_id)
@@ -165,7 +165,7 @@ def sync_zone(domain_records_url, domain):
     print "\nRemoving deleted records"
     for record in existing_records:
         if record['id'] not in synced_record_ids:
-            response = requests.delete("{}/{}".format(domain_records_url, record["id"]), headers=headers)
+            response = requests.delete("{0}/{1}".format(domain_records_url, record["id"]), headers=headers)
             if response.status_code == 204:
                 print "--> Deleted record", record["name"], record["type"], record["data"]
             else:
@@ -183,7 +183,7 @@ def wipe_zone(domain_records_url):
     # print "Response body:", json.dumps(response, indent=4, sort_keys=True)
     if 'domain_records' in response:
         for record in response['domain_records']:
-            response = requests.delete("{}/{}".format(domain_records_url, record["id"]), headers=headers)
+            response = requests.delete("{0}/{1}".format(domain_records_url, record["id"]), headers=headers)
             if response.status_code == 204:
                 print "--> Deleted record", record["type"], record["data"]
             else:
@@ -209,8 +209,8 @@ if __name__ == '__main__':
             found = False
             for filename in sorted(glob.glob("/etc/bind/*.db")):
                 domain = os.path.basename(filename)[:-3]
-                domain_url = base_url + "/{}".format(domain)
-                domain_records_url = "{}/records".format(domain_url)
+                domain_url = base_url + "/{0}".format(domain)
+                domain_records_url = "{0}/records".format(domain_url)
 
                 if resume_domain:
                     if resume_domain == domain:
@@ -234,7 +234,7 @@ if __name__ == '__main__':
         else:
             exit()
     elif len(args) == 2:
-        domain_url = base_url + "/{}".format(args[1])
+        domain_url = base_url + "/{0}".format(args[1])
         if delete:
             print "\nDeleting", args[1], "..."
             response = requests.delete(domain_url, headers=headers)
@@ -243,7 +243,7 @@ if __name__ == '__main__':
             else:
                 handle_error(response)
         else:
-            domain_records_url = "{}/records".format(domain_url)
+            domain_records_url = "{0}/records".format(domain_url)
             check_domain(domain_records_url, args[1])
             sync_zone(domain_records_url, args[1])
     else:
