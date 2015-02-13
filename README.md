@@ -3,7 +3,7 @@ DigitalOcean offers a fantastic DNS service but it is time consuming and cumbers
 have a droplet running a control panel that generates DNS records as part of domain management (e.g. cPanel, 
 DirectAdmin etc).
 
-This python script will synchronise the DNS records from any droplet running BIND with DigitalOcean's 
+This python script will synchronise the DNS records from any droplet running BIND/NAMED with DigitalOcean's 
 DNS servers. It removes the need for 2 droplets to run your own 2-nameserver setup and also means you get to take 
 advantage of DO's far better DNS infrastructure.
 
