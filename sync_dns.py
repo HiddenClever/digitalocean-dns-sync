@@ -116,7 +116,7 @@ def sync_zone(domain_records_url, domain):
                 value = None
                 if rset.rdtype == MX:
                     priority = rdata.preference
-                    value = rdata.exchange
+                    value = "{0}.".format(rdata.exchange)
                 elif rset.rdtype == CNAME:
                     value = rdata.target
                 elif rset.rdtype == A or rset.rdtype == AAAA:
