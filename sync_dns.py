@@ -113,33 +113,35 @@ def sync_zone(domain_records_url, domain):
             print "--> Type:", rdatatype.to_text(rset.rdtype)
             for rdata in rset:
                 priority = None
-                value = None
+                data = None
                 if rset.rdtype == MX:
                     priority = rdata.preference
-                    value = "{0}.".format(rdata.exchange, domain)
+                    data = rdata.exchange
                 elif rset.rdtype == CNAME:
-                    value = rdata.target
+                    data = rdata.target
                 elif rset.rdtype == A or rset.rdtype == AAAA:
-                    value = rdata.address
+                    data = rdata.address
                 elif rset.rdtype == NS:
-                    value = unicode(rdata.target)
+                    data = rdata.target
                 elif rset.rdtype == TXT:
-                    value = " ".join('"{0}"'.format(string) for string in rdata.strings)
-                if value:
+                    data = " ".join('"{0}"'.format(string) for string in rdata.strings)
+                if data:
                     print "--> Priority:", priority
-                    print "--> Value:", value
+                    print "--> Data:", data
 
+                    data = str(data)
                     type = rdatatype.to_text(rset.rdtype)
 
                     # Try and find an existing record
                     record_id = None
                     for record in existing_records:
-                        data = str(value)
-                        if type in ["NS", "MX"]:
-                            data = data[:-1]
-                        elif type == "CNAME":
-                            data = "{0}.{1}".format(data, domain)
-                        if record['name'] == name and record['type'] == type and record['data'] == data:
+                        if type == "NS" or (type in ["CNAME", "MX"] and data[-1:] == "."):
+                            check_data = data[:-1]
+                        elif type == "CNAME" and data[-1:] != ".":
+                            check_data = "{0}.{1}".format(data, domain)
+                        else:
+                            check_data = data
+                        if record['name'] == name and record['type'] == type and record['data'] == check_data:
                             record_id = record['id']
                             synced_record_ids.append(record_id)
                             break
@@ -147,10 +149,12 @@ def sync_zone(domain_records_url, domain):
                     if record_id:
                         print "--> Already exists, skipping"
                     else:
+                        if type == "MX" and data[-1:] != ".":
+                            data = "{0}.{1}.".format(data, domain)
                         post_data = {
                             "type": type,
                             "name": name,
-                            "data": str(value),
+                            "data": data,
                             "priority": priority,
                             "port": None,
                             "weight": None
