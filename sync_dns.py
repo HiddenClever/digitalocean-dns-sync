@@ -135,7 +135,7 @@ def sync_zone(domain_records_url, domain):
                     # Try and find an existing record
                     record_id = None
                     for record in existing_records:
-                        if type == "NS" or (type in ["CNAME", "MX"] and data[-1:] == "."):
+                        if type in ["CNAME", "MX", "NS"] and data[-1:] == ".":
                             check_data = data[:-1]
                         elif type == "CNAME" and data[-1:] != ".":
                             check_data = "{0}.{1}".format(data, domain)
