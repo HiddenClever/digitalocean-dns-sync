@@ -116,7 +116,7 @@ def sync_zone(domain_records_url, domain):
                 value = None
                 if rset.rdtype == MX:
                     priority = rdata.preference
-                    value = "{0}.".format(rdata.exchange)
+                    value = "{0}.{1}.".format(rdata.exchange, domain)
                 elif rset.rdtype == CNAME:
                     value = rdata.target
                 elif rset.rdtype == A or rset.rdtype == AAAA:
@@ -137,7 +137,7 @@ def sync_zone(domain_records_url, domain):
                         data = str(value)
                         if type == "NS":
                             data = data[:-1]
-                        elif type in ["CNAME", "MX"]:
+                        elif type == "CNAME":
                             data = "{0}.{1}".format(data, domain)
                         if record['name'] == name and record['type'] == type and record['data'] == data:
                             record_id = record['id']
