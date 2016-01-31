@@ -11,8 +11,8 @@ advantage of DO's far better DNS infrastructure.
 
 1. Generate a Personal Access Token from https://cloud.digitalocean.com/settings/applications if you haven't got one 
  already.
-2. Run ```sudo pip install dnspython requests``` or install the Python Requests library however you would normally 
- http://docs.python-requests.org/en/latest/.
+2. Run ```sudo pip install dnspython requests``` or install dnspython http://www.dnspython.org/ and the Python Requests 
+library however you would normally http://docs.python-requests.org/en/latest/.
 3. Create a sync_dns_settings.py file in the project directory (it's listed in .gitignore so won't be committed) containing 
  2 variables: ip is the IP address of the server you are syncing and auth_token is your DigitalOcean API Personal Access
  Token.
