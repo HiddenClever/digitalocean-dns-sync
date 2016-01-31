@@ -19,7 +19,7 @@ library however you would normally http://docs.python-requests.org/en/latest/.
 4. Either run: ```python sync_dns.py``` to do a complete wipe of DO's records for all domains that are on the droplet and
  re-sync from scratch. It won't wipe domains from DO's DNS it doesn't find on the droplet so you are free to continue to
  use the DNS manually for other domains if you wish. Or alternatively run: ```python sync_dns.py domainname```to do an 
- intelligent sync of just that domain.
+ intelligent sync just for that domain.
 5. Check your DO DNS entries to make sure it's correct then set your nameservers to ns1.digitalocean.com, 
  ns2.digitalocean.com and ns3.digitalocean.com or follow this tutorial 
  https://www.digitalocean.com/community/tutorials/how-to-create-vanity-or-branded-nameservers-with-digitalocean-cloud-servers 
