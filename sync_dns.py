@@ -129,7 +129,7 @@ def sync_zone(domain_records_url, domain):
                     print "--> Priority:", priority
                     print "--> Data:", data
 
-                    data = str(data)
+                    data = unicode(data)
                     type = rdatatype.to_text(rset.rdtype)
 
                     # Try and find an existing record
@@ -149,7 +149,7 @@ def sync_zone(domain_records_url, domain):
                     if record_id:
                         print "--> Already exists, skipping"
                     else:
-                        if type == "MX" and data[-1:] != ".":
+                        if type in ["MX", "CNAME"] and data[-1:] != ".":
                             data = "{0}.{1}.".format(data, domain)
                         post_data = {
                             "type": type,
