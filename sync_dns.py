@@ -117,8 +117,12 @@ def sync_zone(domain_records_url, domain):
                 if rset.rdtype == MX:
                     priority = rdata.preference
                     data = rdata.exchange
+                    print "--> Priority:", priority
                 elif rset.rdtype == CNAME:
-                    data = rdata.target
+                    if unicode(rdata) == "@":
+                        data = "@"
+                    else:
+                        data = rdata.target
                 elif rset.rdtype == A or rset.rdtype == AAAA:
                     data = rdata.address
                 elif rset.rdtype == NS:
@@ -126,7 +130,6 @@ def sync_zone(domain_records_url, domain):
                 elif rset.rdtype == TXT:
                     data = " ".join('"{0}"'.format(string) for string in rdata.strings)
                 if data:
-                    print "--> Priority:", priority
                     print "--> Data:", data
 
                     data = unicode(data)
@@ -135,7 +138,7 @@ def sync_zone(domain_records_url, domain):
                     # Try and find an existing record
                     record_id = None
                     for record in existing_records:
-                        if type in ["CNAME", "MX", "NS"] and data[-1:] == ".":
+                        if type in ["CNAME", "MX", "NS"] and data != "@" and data[-1:] == ".":
                             check_data = data[:-1]
                         elif type == "CNAME" and data[-1:] != ".":
                             check_data = "{0}.{1}".format(data, domain)
@@ -149,7 +152,7 @@ def sync_zone(domain_records_url, domain):
                     if record_id:
                         print "--> Already exists, skipping"
                     else:
-                        if type in ["MX", "CNAME"] and data[-1:] != ".":
+                        if type in ["CNAME", "MX", "NS"] and data[-1:] != ".":
                             data = "{0}.{1}.".format(data, domain)
                         post_data = {
                             "type": type,
