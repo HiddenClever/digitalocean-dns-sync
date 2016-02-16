@@ -138,7 +138,7 @@ def sync_zone(domain_records_url, domain):
                     # Try and find an existing record
                     record_id = None
                     for record in existing_records:
-                        if type in ["CNAME", "MX", "NS"] and data != "@" and data[-1:] == ".":
+                        if type in ["CNAME", "MX", "NS"] and data[-1:] == ".":
                             check_data = data[:-1]
                         elif type == "CNAME" and data[-1:] != ".":
                             check_data = "{0}.{1}".format(data, domain)
@@ -152,7 +152,7 @@ def sync_zone(domain_records_url, domain):
                     if record_id:
                         print "--> Already exists, skipping"
                     else:
-                        if type in ["CNAME", "MX", "NS"] and data[-1:] != ".":
+                        if type in ["CNAME", "MX", "NS"] and data != "@" and data[-1:] != ".":
                             data = "{0}.{1}.".format(data, domain)
                         post_data = {
                             "type": type,
