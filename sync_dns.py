@@ -140,8 +140,8 @@ def sync_zone(domain_records_url, domain):
                     for record in existing_records:
                         if type in ["CNAME", "MX", "NS"] and data[-1:] == ".":
                             check_data = data[:-1]
-                        elif type == "CNAME" and data[-1:] != ".":
-                            check_data = "{0}.{1}".format(data, domain)
+                        # elif type == "CNAME" and data[-1:] != ".":
+                        #     check_data = "{0}.{1}".format(data, domain)
                         else:
                             check_data = data
                         if record['name'] == name and record['type'] == type and record['data'] == check_data:
