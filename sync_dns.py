@@ -175,7 +175,7 @@ def sync_zone(domain_records_url, domain):
         if record['id'] not in synced_record_ids:
             response = requests.delete("{0}/{1}".format(domain_records_url, record["id"]), headers=headers)
             if response.status_code == 204:
-                print "--> Deleted record", record["name"], record["type"], record["data"]
+                print "--> Deleted record", record["name"], "IN", record["type"], record["data"]
             else:
                 handle_error(response)
     print "--> Done"
@@ -185,7 +185,7 @@ def sync_zone(domain_records_url, domain):
     for record in updated_records:
         response = requests.post(domain_records_url, data=json.dumps(record), headers=headers).json()
         if 'domain_record' in response:
-            print "--> Updated record", record["name"], record["type"], record["data"]
+            print "--> Updated record", record["name"], "IN", record["type"], record["data"]
         else:
             handle_error(response)
     print "--> Done"
