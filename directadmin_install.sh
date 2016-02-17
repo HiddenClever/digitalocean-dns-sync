@@ -24,56 +24,61 @@ cp sync_dns_settings.py /usr/local/directadmin/scripts/custom/
 cp sync_dns_functions.sh /usr/local/directadmin/scripts/custom/
 echo "--> Done"
 
-echo $'\n'"Creating DirectAdmin custom scripts"
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_change_post.sh ]; then
-  # If the script doesn't exist, create the header
-  echo -e "#!/bin/bash\n\nsource /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n" > /usr/local/directadmin/scripts/custom/domain_change_post.sh
-fi
-echo -e "check_sync_scheduled\nif [ $? == \"0\" ]\nthen" >> /usr/local/directadmin/scripts/custom/domain_change_post.sh
-echo -e "    echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain --delete && python /usr/local/directadmin/scripts/custom/sync_dns.py \$newdomain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/domain_change_post.sh
-echo -e "fi\n" >> /usr/local/directadmin/scripts/custom/domain_change_post.sh
+echo -e "\nCreating DirectAdmin custom scripts"
 
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_create_post.sh ]; then
-  # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_create_post.sh
-fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/domain_create_post.sh
+HEADER="#!/bin/bash\n\nsource /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n"
+CHKIF="check_sync_scheduled\n\nif [ \$? == \"0\" ]\nthen\n    "
+CHKFI="\nfi\n"
+DIR="/usr/local/directadmin/scripts/custom"
+CMD="python $DIR/sync_dns.py"
 
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_destroy_post.sh ]; then
+if [ ! -f $DIR/domain_change_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_destroy_post.sh
+  echo -e $HEADER > $DIR/domain_change_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain --delete\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/domain_destroy_post.sh
+echo -e $CHKIF"echo \"$CMD \$domain --delete && $CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/domain_change_post.sh
 
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh ]; then
+if [ ! -f $DIR/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh
+  echo -e $HEADER > $DIR/domain_create_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/domain_pointer_create_post.sh
+echo -e $CHKIF"echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/domain_create_post.sh
 
-if [ ! -f /usr/local/directadmin/scripts/custom/domain_pointer_destroy_post.sh ]; then
+if [ ! -f $DIR/domain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/domain_pointer_destroy_post.sh
+  echo -e $HEADER > $DIR/domain_destroy_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain --delete\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/domain_pointer_destroy_post.sh
+echo -e $CHKIF"echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/domain_destroy_post.sh
 
-if [ ! -f /usr/local/directadmin/scripts/custom/dns_write_post.sh ]; then
+if [ ! -f $DIR/domain_pointer_create_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/dns_write_post.sh
+  echo -e $HEADER > $DIR/domain_pointer_create_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/dns_write_post.sh
+echo -e $CHKIF"echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/domain_pointer_create_post.sh
 
-if [ ! -f /usr/local/directadmin/scripts/custom/subdomain_create_post.sh ]; then
+if [ ! -f $DIR/domain_pointer_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/subdomain_create_post.sh
+  echo -e $HEADER > $DIR/domain_pointer_destroy_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/subdomain_create_post.sh
+echo -e $CHKIF"echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/domain_pointer_destroy_post.sh
 
-if [ ! -f /usr/local/directadmin/scripts/custom/subdomain_destroy_post.sh ]; then
+if [ ! -f $DIR/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
-  echo "#!/bin/bash"$'\n' > /usr/local/directadmin/scripts/custom/subdomain_destroy_post.sh
+  echo "#!/bin/bash"$'\n' > $DIR/dns_write_post.sh
 fi
-echo "echo \"python /usr/local/directadmin/scripts/custom/sync_dns.py \$domain --delete\" | at now + 1 minute > /dev/null 2>&1"$'\n'"echo \"DNS records will sync in 1 minute\"" >> /usr/local/directadmin/scripts/custom/subdomain_destroy_post.sh
+echo -e $CHKIF"echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/dns_write_post.sh
+
+if [ ! -f $DIR/subdomain_create_post.sh ]; then
+  # If the script doesn't exist, create the header
+  echo "#!/bin/bash"$'\n' > $DIR/subdomain_create_post.sh
+fi
+echo -e $CHKIF"echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/subdomain_create_post.sh
+
+if [ ! -f $DIR/subdomain_destroy_post.sh ]; then
+  # If the script doesn't exist, create the header
+  echo "#!/bin/bash"$'\n' > $DIR/subdomain_destroy_post.sh
+fi
+echo -e $CHKIF"echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\""$CHKFI >> $DIR/subdomain_destroy_post.sh
 
 echo "--> Done"
 
