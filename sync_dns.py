@@ -187,7 +187,7 @@ def sync_zone(domain_records_url, domain):
         if not 'domain_record' in response:
               handle_error(response)
         else:
-            print "-->", record[name], "IN", record[type], "updated"
+            print "-->", record['name'], "IN", record['type'], "updated"
     print "--> Done"
 
     print "\n--> Complete\n"
