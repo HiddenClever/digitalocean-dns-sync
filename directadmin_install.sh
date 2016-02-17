@@ -35,7 +35,7 @@ if [ ! -f $DIR/domain_change_post.sh ]; then
   echo -e $HEADER > $DIR/domain_change_post.sh
 fi
 echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n" >> $DIR/domain_change_post.sh
-echo -e "clear_sync_queue \$newdomain\n\necho \"$CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_change_post.sh
+echo -e "clear_sync_queue \$newdomain\n\necho \"$CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\n\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_change_post.sh
 
 if [ ! -f $DIR/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
