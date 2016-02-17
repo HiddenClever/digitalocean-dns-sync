@@ -77,7 +77,7 @@ if [ ! -f $DIR/subdomain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/subdomain_destroy_post.sh
 fi
-echo -e "$CLEARQUEUE $domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/subdomain_destroy_post.sh 
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/subdomain_destroy_post.sh
 
 echo "--> Done"
 
