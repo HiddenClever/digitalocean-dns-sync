@@ -36,50 +36,50 @@ if [ ! -f $DIR/domain_change_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_change_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n" >> $DIR/domain_change_post.sh
-echo -e "$CLEARQUEUE \$newdomain\n\necho \"$CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_change_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 10 hours > /dev/null 2>&1\n" >> $DIR/domain_change_post.sh
+echo -e "$CLEARQUEUE \$newdomain\n\necho \"$CMD \$newdomain\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/domain_change_post.sh
 
 if [ ! -f $DIR/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_create_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_create_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/domain_create_post.sh
 
 if [ ! -f $DIR/domain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_destroy_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_destroy_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/domain_destroy_post.sh
 
 if [ ! -f $DIR/domain_pointer_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_pointer_create_post.sh
 fi
-echo -e "$CLEARQUEUE \$DOMAIN\n\necho \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_pointer_create_post.sh
+echo -e "$CLEARQUEUE \$DOMAIN\n\necho \"$CMD \$DOMAIN\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/domain_pointer_create_post.sh
 
 if [ ! -f $DIR/domain_pointer_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_pointer_destroy_post.sh
 fi
-echo -e "$CLEARQUEUE \$from\n\necho \"$CMD \$from --delete\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_pointer_destroy_post.sh
+echo -e "$CLEARQUEUE \$from\n\necho \"$CMD \$from --delete\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/domain_pointer_destroy_post.sh
 
 if [ ! -f $DIR/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/dns_write_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/dns_write_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$DOMAIN\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/dns_write_post.sh
 
 if [ ! -f $DIR/subdomain_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/subdomain_create_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/subdomain_create_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/subdomain_create_post.sh
 
 if [ ! -f $DIR/subdomain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/subdomain_destroy_post.sh
 fi
-echo -e "$CLEARQUEUE $domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/subdomain_destroy_post.sh 
+echo -e "$CLEARQUEUE $domain\n\necho \"$CMD \$domain --delete\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/subdomain_destroy_post.sh 
 
 echo "--> Done"
 
