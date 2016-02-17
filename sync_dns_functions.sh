@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Checks to see whether there is a DNS sync already scheduled
 check_sync_scheduled() {
     for job in $(atq | cut -f 1)
     do
