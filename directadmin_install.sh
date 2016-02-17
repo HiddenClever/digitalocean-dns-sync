@@ -26,8 +26,7 @@ echo "--> Done"
 echo -e "\nCreating DirectAdmin custom scripts"
 
 HEADER="#!/bin/bash\n"
-FUNCSOURCE="source /usr/local/directadmin/scripts/custom/sync_dns_functions.sh"
-CLEARQUEUE="$FUNCSOURCE\n\nclear_sync_queue"
+CLEARQUEUE="source /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n\nclear_sync_queue"
 DIR="/usr/local/directadmin/scripts/custom"
 CMD="python $DIR/sync_dns.py"
 
@@ -35,8 +34,7 @@ if [ ! -f $DIR/domain_change_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_change_post.sh
 fi
-echo -e $FUNCSOURCE
-echo -e "clear_sync_queue \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n" >> $DIR/domain_change_post.sh
+echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n" >> $DIR/domain_change_post.sh
 echo -e "clear_sync_queue \$newdomain\n\necho \"$CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\necho \"DNS records will sync in 1 minute\"" >> $DIR/domain_change_post.sh
 
 if [ ! -f $DIR/domain_create_post.sh ]; then
