@@ -54,4 +54,6 @@ docs/_build/
 target/
 
 # Project-specific files
+*.*~
+.idea
 sync_dns_settings.py
