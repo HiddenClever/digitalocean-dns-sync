@@ -166,6 +166,7 @@ def sync_zone(domain_records_url, domain):
                             "weight": None
                         }
                         # Collect records to be updated into the updated_records array
+                        print "--> Queuing to update"
                         updated_records.append(post_data)
 
     # Delete any records that exist with DigitalOcean that have been removed
@@ -180,6 +181,7 @@ def sync_zone(domain_records_url, domain):
     print "--> Done"
 
     # Finally, post the responses for the updated records
+    print "\nPosting updated records"
     for record in updated_records:
         response = requests.post(domain_records_url, data=json.dumps(record), headers=headers).json()
         if not 'domain_record' in response:
