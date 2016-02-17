@@ -91,6 +91,9 @@ def sync_zone(domain_records_url, domain):
     # First get all the existing records
     existing_records = requests.get(domain_records_url+"?per_page=9999", headers=headers).json().get('domain_records', [])
 
+    # Create an array to hold all the updated records
+    updated_records = []
+
     # Create an array to hold synchronised record IDs
     synced_record_ids = []
 
@@ -162,13 +165,10 @@ def sync_zone(domain_records_url, domain):
                             "port": None,
                             "weight": None
                         }
-                        response = requests.post(domain_records_url, data=json.dumps(post_data), headers=headers).json()
-                        if not 'domain_record' in response:
-                              handle_error(response)
-                        else:
-                            print "--> Done"
+                        # Collect records to be updated into the updated_records array
+                        updated_records.append(post_data)
 
-    # Finally, delete any records that exist with DigitalOcean that have been removed
+    # Delete any records that exist with DigitalOcean that have been removed
     print "\nRemoving deleted records"
     for record in existing_records:
         if record['id'] not in synced_record_ids:
@@ -178,6 +178,14 @@ def sync_zone(domain_records_url, domain):
             else:
                 handle_error(response)
     print "--> Done"
+
+    # Finally, post the responses for the updated records
+    for record in updated_records:
+        response = requests.post(domain_records_url, data=json.dumps(record), headers=headers).json()
+        if not 'domain_record' in response:
+              handle_error(response)
+        else:
+            print "--> Done"
 
     print "\n--> Complete\n"
 
