@@ -250,9 +250,12 @@ if __name__ == '__main__':
             else:
                 handle_error(response)
         else:
-            domain_records_url = "{0}/records".format(domain_url)
-            check_domain(domain_records_url, args[1])
-            sync_zone(domain_records_url, args[1])
+            if os.path.isfile("/etc/bind/{0}.db".format(args[1])):
+                domain_records_url = "{0}/records".format(domain_url)
+                check_domain(domain_records_url, args[1])
+                sync_zone(domain_records_url, args[1])
+            else:
+                print >>sys.stderr, "[ERROR] Could not find zone file for {0}".format(args[1])
     else:
         print "You have supplied too many arguments. Usage:"
         print "python sync_dns.py will wipe and re-sync all DNS records in the droplet"
