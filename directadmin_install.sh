@@ -25,8 +25,8 @@ echo "--> Done"
 
 echo -e "\nCreating DirectAdmin custom scripts"
 
-HEADER="#!/bin/bash\n\nsource /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n"
-CHKOPEN="check_sync_scheduled\n\nif [ \$? == \"0\" ]\nthen\n"
+HEADER="#!/bin/bash\n"
+CHKOPEN="source /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n\ncheck_sync_scheduled\n\nif [ \$? == \"0\" ]\nthen\n"
 CHKCLOSE="\nfi\n"
 DIR="/usr/local/directadmin/scripts/custom"
 CMD="python $DIR/sync_dns.py"
