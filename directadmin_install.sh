@@ -81,9 +81,9 @@ echo -e "$CHKOPEN    echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/
 
 echo "--> Done"
 
-echo $'\n'"Setting permissions"
+echo -e "\nSetting permissions"
 chown -R diradmin:diradmin /usr/local/directadmin/scripts/custom/*
 chmod -R +x /usr/local/directadmin/scripts/custom/*.sh
 echo "--> Done"
 
-echo $'\n\n'"DirectAdmin-DigitalOcean DNS Sync Installation Complete"$'\n'
+echo -e "\n\nDirectAdmin-DigitalOcean DNS Sync Installation Complete\n"
