@@ -27,8 +27,6 @@ echo -e "\nCreating DirectAdmin custom scripts"
 
 HEADER="#!/bin/bash\n"
 CLEARQUEUE="source /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n\nclear_sync_queue"
-#CHKOPEN="if [ \$? == \"0\" ]\nthen\n"
-#CHKCLOSE="\nfi\n"
 DIR="/usr/local/directadmin/scripts/custom"
 CMD="python $DIR/sync_dns.py"
 
