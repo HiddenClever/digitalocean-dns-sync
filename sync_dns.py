@@ -184,10 +184,10 @@ def sync_zone(domain_records_url, domain):
     print "\nPosting updated records"
     for record in updated_records:
         response = requests.post(domain_records_url, data=json.dumps(record), headers=headers).json()
-        if not 'domain_record' in response:
-              handle_error(response)
+        if 'domain_record' in response:
+            print "--> Updated record", record["name"], record["type"], record["data"]
         else:
-            print "-->", record['name'], "IN", record['type'], "updated"
+            handle_error(response)
     print "--> Done"
 
     print "\n--> Complete\n"
