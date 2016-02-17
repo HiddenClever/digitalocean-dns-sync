@@ -36,49 +36,48 @@ if [ ! -f $DIR/domain_change_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_change_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$domain --delete && $CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_change_post.sh
+echo -e "$CHKRUN \$domain\n\n$CHKOPEN    echo \"$CMD \$domain --delete && $CMD \$newdomain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_change_post.sh
 
 if [ ! -f $DIR/domain_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_create_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_create_post.sh
+echo -e "$CHKRUN \$domain\n\n$CHKOPEN    echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_create_post.sh
 
 if [ ! -f $DIR/domain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_destroy_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_destroy_post.sh
+echo -e "$CHKRUN \$domain\n\n$CHKOPEN    echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_destroy_post.sh
 
 if [ ! -f $DIR/domain_pointer_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_pointer_create_post.sh
 fi
-echo -e "$CHKRUN $DOMAIN\n\n$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_create_post.sh
+echo -e "$CHKRUN \$DOMAIN\n\n$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_create_post.sh
 
 if [ ! -f $DIR/domain_pointer_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_pointer_destroy_post.sh
 fi
-echo -e "$CHKRUN $from\n\n$CHKOPEN    echo \"$CMD \$from --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_destroy_post.sh
+echo -e "$CHKRUN \$from\n\n$CHKOPEN    echo \"$CMD \$from --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_destroy_post.sh
 
 if [ ! -f $DIR/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/dns_write_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/dns_write_post.sh
+echo -e "$CHKRUN \$domain\n\n$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/dns_write_post.sh
 
 if [ ! -f $DIR/subdomain_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/subdomain_create_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/subdomain_create_post.sh
+echo -e "$CHKRUN \$domain\n\n$CHKOPEN    echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/subdomain_create_post.sh
 
 if [ ! -f $DIR/subdomain_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/subdomain_destroy_post.sh
 fi
-echo -e "$CHKRUN $domain\n\n$CHKOPEN    echo \"$CMD \$domain --delete\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/subdomain_destroy_post.sh
 
 echo "--> Done"
 
