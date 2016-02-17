@@ -12,5 +12,3 @@ check_sync_scheduled() {
     done
     return 0
 }
-
-check_sync_scheduled hiddenclever.com
