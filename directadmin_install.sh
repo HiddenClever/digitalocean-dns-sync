@@ -53,7 +53,7 @@ if [ ! -f $DIR/domain_pointer_create_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/domain_pointer_create_post.sh
 fi
-echo -e "$CHKOPEN    echo \"$CMD \$from\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_create_post.sh
+echo -e "$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/domain_pointer_create_post.sh
 
 if [ ! -f $DIR/domain_pointer_destroy_post.sh ]; then
   # If the script doesn't exist, create the header
@@ -65,7 +65,7 @@ if [ ! -f $DIR/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/dns_write_post.sh
 fi
-echo -e "$CHKOPEN    echo \"$CMD \$domain\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/dns_write_post.sh
+echo -e "$CHKOPEN    echo \"$CMD \$DOMAIN\" | at now + 1 minute > /dev/null 2>&1\n    echo \"DNS records will sync in 1 minute\"$CHKCLOSE" >> $DIR/dns_write_post.sh
 
 if [ ! -f $DIR/subdomain_create_post.sh ]; then
   # If the script doesn't exist, create the header
