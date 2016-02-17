@@ -67,7 +67,7 @@ if [ ! -f $DIR/dns_write_post.sh ]; then
   # If the script doesn't exist, create the header
   echo -e $HEADER > $DIR/dns_write_post.sh
 fi
-echo -e "$CLEARQUEUE \$domain\n\necho \"$CMD \$DOMAIN\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/dns_write_post.sh
+echo -e "$CLEARQUEUE \$DOMAIN\n\necho \"$CMD \$DOMAIN\" | at now + 10 hours > /dev/null 2>&1\necho \"DNS records will sync in 10 hours\"" >> $DIR/dns_write_post.sh
 
 if [ ! -f $DIR/subdomain_create_post.sh ]; then
   # If the script doesn't exist, create the header
