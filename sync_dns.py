@@ -115,8 +115,10 @@ def sync_zone(domain_records_url, domain):
             print "--> TTL:", str(rset.ttl)
             print "--> Type:", rdatatype.to_text(rset.rdtype)
             for rdata in rset:
-                priority = None
                 data = None
+                priority = None
+                port = None
+                weight = None
                 if rset.rdtype == MX:
                     priority = rdata.preference
                     data = rdata.exchange
@@ -129,6 +131,11 @@ def sync_zone(domain_records_url, domain):
                 elif rset.rdtype == A or rset.rdtype == AAAA:
                     data = rdata.address
                 elif rset.rdtype == NS:
+                    data = rdata.target
+                elif rset.rdtype == SRV:
+                    priority = rdata.priority
+                    weight = rdata.weight
+                    port = rdata.port
                     data = rdata.target
                 elif rset.rdtype == TXT:
                     data = " ".join('"{0}"'.format(string) for string in rdata.strings)
@@ -162,8 +169,8 @@ def sync_zone(domain_records_url, domain):
                             "name": name,
                             "data": data,
                             "priority": priority,
-                            "port": None,
-                            "weight": None
+                            "port": port,
+                            "weight": weight
                         }
                         # Collect records to be updated into the updated_records array
                         print "--> Queuing to update"
