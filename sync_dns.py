@@ -121,8 +121,11 @@ def sync_zone(domain_records_url, domain):
                 weight = None
                 if rset.rdtype == MX:
                     priority = rdata.preference
-                    data = rdata.exchange
                     print "--> Priority:", priority
+                    if unicode(rdata.exchange) == "@":
+                        data = domain + "."
+                    else:
+                        data = rdata.exchange
                 elif rset.rdtype == CNAME:
                     if unicode(rdata) == "@":
                         data = "@"
