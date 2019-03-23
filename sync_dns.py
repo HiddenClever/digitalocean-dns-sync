@@ -9,10 +9,11 @@ import os.path
 import sys
 
 try:
-    from sync_dns_settings import ip, auth_token
+    from sync_dns_settings import ip, auth_token, bindfolder, bindextension
 except ImportError:
-    print >>sys.stderr, "[ERROR] You must create a settings file containing both the IP of the server you are " \
-                        "synchronising and your DigitalOcean API Personal Access Token."
+    print >>sys.stderr, "[ERROR] Please copy sync_dns_settings.py.example to sync_dns_settings.py " \
+                        "and adjust the values with the server ip address and your digitalocean api key." \
+                        "Also change the bindfolder and bindextension values if they're different on your server."
     exit()
 
 
@@ -98,7 +99,8 @@ def sync_zone(domain_records_url, domain):
     synced_record_ids = []
 
     # Get the BIND raw DNS dump
-    with open("/etc/bind/{0}.db".format(domain), "r") as dns_file:
+    bindfile = 'bindfolder' + 'domain' + 'bindextension'
+    with open('bindfile', "r") as dns_file:
         dns_dump = dns_file.read()
 
     dns_dump = "$ORIGIN {0}.\n{1}".format(domain, dns_dump)
@@ -235,7 +237,7 @@ if __name__ == '__main__':
         resume_domain = raw_input("If so type the last domain name here to resume: ")
         if sync_all == "y":
             found = False
-            for filename in sorted(glob.glob("/etc/bind/*.db")):
+            for filename in sorted(glob.glob(bindfolder+"*"+bindextension)):
                 domain = os.path.basename(filename)[:-3]
                 domain_url = base_url + "/{0}".format(domain)
                 domain_records_url = "{0}/records".format(domain_url)
@@ -271,7 +273,8 @@ if __name__ == '__main__':
             else:
                 handle_error(response)
         else:
-            if os.path.isfile("/etc/bind/{0}.db".format(args[1])):
+            domainfile = bindfolder + args[1] + bindextension
+            if os.path.isfile('domainfile'):
                 domain_records_url = "{0}/records".format(domain_url)
                 check_domain(domain_records_url, args[1])
                 sync_zone(domain_records_url, args[1])

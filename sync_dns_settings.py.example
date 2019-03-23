@@ -1,0 +1,8 @@
+# Example file for sync_dns
+# Copy this file to "sync_dns_settings.py" and adjust with your values.
+# It's in .gitignore so won't be synced
+
+ip="[your server ip address]"
+auth_token="[please put your DO token here]"
+bindfolder = "/etc/bind/"
+bindextension = ".db"
