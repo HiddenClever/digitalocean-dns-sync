@@ -159,6 +159,10 @@ def sync_zone(domain_records_url, domain):
                             check_data = data[:-1]
                         else:
                             check_data = data
+                        if check_data == "@":
+                            check_data = "%s."%(domain)
+                        if unicode(record['data']) == "@":
+                            record['data'] = "%s."%(domain)
                         if record['name'] == name and record['type'] == type and record['data'] == check_data:
                             record_id = record['id']
                             synced_record_ids.append(record_id)
