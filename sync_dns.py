@@ -125,9 +125,9 @@ def sync_zone(domain_records_url, domain):
                     priority = rdata.preference
                     print "--> Priority:", priority
                     if unicode(rdata.exchange) == "@":
-                        data = domain + "."
+                        data = "%s."%(domain)
                     else:
-                        data = rdata.exchange
+                        data = "%s.%s."%(rdata.exchange, domain)
                 elif rset.rdtype == CNAME:
                     if unicode(rdata) == "@":
                         data = "@"
@@ -157,8 +157,6 @@ def sync_zone(domain_records_url, domain):
                     for record in existing_records:
                         if type in ["CNAME", "MX", "NS", "SRV"] and data[-1:] == ".":
                             check_data = data[:-1]
-                        elif type == "AAAA":
-                            check_data = data.lower()
                         else:
                             check_data = data
                         if record['name'] == name and record['type'] == type and record['data'] == check_data:
