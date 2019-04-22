@@ -133,8 +133,10 @@ def sync_zone(domain_records_url, domain):
                         data = "@"
                     else:
                         data = rdata.target
-                elif rset.rdtype == A or rset.rdtype == AAAA:
+                elif rset.rdtype == A:
                     data = rdata.address
+                elif rset.rdtype == AAAA:
+                    data = rdata.address.lower()
                 elif rset.rdtype == NS:
                     data = rdata.target
                 elif rset.rdtype == SRV:
@@ -155,8 +157,8 @@ def sync_zone(domain_records_url, domain):
                     for record in existing_records:
                         if type in ["CNAME", "MX", "NS", "SRV"] and data[-1:] == ".":
                             check_data = data[:-1]
-                        # elif type == "CNAME" and data[-1:] != ".":
-                        #     check_data = "{0}.{1}".format(data, domain)
+                        elif type == "AAAA":
+                            check_data = data.lower()
                         else:
                             check_data = data
                         if record['name'] == name and record['type'] == type and record['data'] == check_data:
