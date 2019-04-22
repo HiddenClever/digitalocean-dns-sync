@@ -99,8 +99,8 @@ def sync_zone(domain_records_url, domain):
     synced_record_ids = []
 
     # Get the BIND raw DNS dump
-    bindfile = 'bindfolder' + 'domain' + 'bindextension'
-    with open('bindfile', "r") as dns_file:
+    bindfile = bindfolder + domain + bindextension
+    with open(bindfile, "r") as dns_file:
         dns_dump = dns_file.read()
 
     dns_dump = "$ORIGIN {0}.\n{1}".format(domain, dns_dump)
@@ -274,7 +274,7 @@ if __name__ == '__main__':
                 handle_error(response)
         else:
             domainfile = bindfolder + args[1] + bindextension
-            if os.path.isfile('domainfile'):
+            if os.path.isfile(domainfile):
                 domain_records_url = "{0}/records".format(domain_url)
                 check_domain(domain_records_url, args[1])
                 sync_zone(domain_records_url, args[1])
