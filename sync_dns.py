@@ -274,7 +274,7 @@ if __name__ == '__main__':
                 handle_error(response)
         else:
             domainfile = bindfolder + args[1] + bindextension
-            if os.path.isfile('domainfile'):
+            if os.path.isfile(domainfile):
                 domain_records_url = "{0}/records".format(domain_url)
                 check_domain(domain_records_url, args[1])
                 sync_zone(domain_records_url, args[1])
