@@ -7,7 +7,7 @@ This python script will synchronise the DNS records from any droplet running BIN
 DNS servers. It removes the need for 2 droplets to run your own 2-nameserver setup and also means you get to take
 advantage of DO's far better DNS infrastructure.
 
-###Usage###
+### Usage
 
 1. Generate a Personal Access Token from https://cloud.digitalocean.com/settings/applications if you haven't got one
  already.
@@ -23,6 +23,6 @@ library however you would normally http://docs.python-requests.org/en/latest/.
  https://www.digitalocean.com/community/tutorials/how-to-create-vanity-or-branded-nameservers-with-digitalocean-cloud-servers
  to brand your own nameservers.
 
-###Credit###
+### Credit
 
 Initial inspiration came from here https://cloud.google.com/dns/migrating-bind-zone-python
