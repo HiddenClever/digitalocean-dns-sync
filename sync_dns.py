@@ -125,9 +125,9 @@ def sync_zone(domain_records_url, domain):
                     priority = rdata.preference
                     print "--> Priority:", priority
                     if unicode(rdata.exchange) == "@":
-                        data = "%s."%(domain)
+                        data = "%s." % (domain)
                     else:
-                        data = "%s.%s."%(rdata.exchange, domain)
+                        data = "%s.%s." % (rdata.exchange, domain)
                 elif rset.rdtype == CNAME:
                     if unicode(rdata) == "@":
                         data = "@"
@@ -237,7 +237,7 @@ if __name__ == '__main__':
         resume_domain = raw_input("If so type the last domain name here to resume: ")
         if sync_all == "y":
             found = False
-            for filename in sorted(glob.glob(bindfolder+"*"+bindextension)):
+            for filename in sorted(glob.glob(bindfolder + "*" + bindextension)):
                 domain = os.path.basename(filename)[:-3]
                 domain_url = base_url + "/{0}".format(domain)
                 domain_records_url = "{0}/records".format(domain_url)
