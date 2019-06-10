@@ -126,8 +126,10 @@ def sync_zone(domain_records_url, domain):
                     print "--> Priority:", priority
                     if unicode(rdata.exchange) == "@":
                         data = "%s." % (domain)
-                    else:
+                    elif unicode(rdata.exchange)[-1:] != ".":
                         data = "%s.%s." % (rdata.exchange, domain)
+                    else:
+                        data = "%s" % (rdata.exchange)
                 elif rset.rdtype == CNAME:
                     if unicode(rdata) == "@":
                         data = "@"
