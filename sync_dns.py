@@ -217,6 +217,8 @@ def wipe_zone(domain_records_url):
             response = requests.delete("{0}/{1}".format(domain_records_url, record["id"]), headers=headers)
             if response.status_code == 204:
                 print("--> Deleted record", record["type"], record["data"])
+            elif response.status_code == 422:
+                print("--> SOA record detected, ignoring")
             else:
                 handle_error(response)
         print("--> Done")
@@ -251,12 +253,7 @@ if __name__ == '__main__':
 
                 # 1. Delete the domain. We do this because it is quicker than wiping each record individually.
                 print("\nDeleting", domain, "...")
-                try:
-                    response = requests.delete(domain_url, headers=headers)
-                except:
-                    print("[ERROR] Can't delete", domain_url, ", ignoring...")
-                    continue
-                    
+                response = requests.delete(domain_url, headers=headers)
                 if response.status_code == 204:
                     print("--> Done")
                 else:
