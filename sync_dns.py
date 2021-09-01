@@ -188,7 +188,7 @@ def sync_zone(domain_records_url, domain):
         if record['id'] not in synced_record_ids and record['type'] != 'SOA':
             response = requests.delete("{0}/{1}".format(domain_records_url, record["id"]), headers=headers)
             if response.status_code == 204:
-                print("--> Deleted record", record["name"], "IN", record["type"], record["data"]
+                print("--> Deleted record", record["name"], "IN", record["type"], record["data"])
             else:
                 handle_error(response)
     print("--> Done")
