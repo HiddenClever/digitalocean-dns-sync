@@ -28,7 +28,7 @@ echo -e "\nCreating DirectAdmin custom scripts"
 HEADER="#!/bin/bash\n"
 CLEARQUEUE="source /usr/local/directadmin/scripts/custom/sync_dns_functions.sh\n\nclear_sync_queue"
 DIR="/usr/local/directadmin/scripts/custom"
-CMD="python $DIR/sync_dns.py"
+CMD="python3 $DIR/sync_dns.py"
 
 if [ ! -f $DIR/domain_change_post.sh ]; then
   # If the script doesn't exist, create the header
