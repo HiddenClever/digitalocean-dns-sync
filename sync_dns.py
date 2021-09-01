@@ -251,7 +251,10 @@ if __name__ == '__main__':
 
                 # 1. Delete the domain. We do this because it is quicker than wiping each record individually.
                 print("\nDeleting", domain, "...")
-                response = requests.delete(domain_url, headers=headers)
+                try:
+                    response = requests.delete(domain_url, headers=headers)
+                except:
+                    print("[ERROR] Can't delete", domain_url, ", ignoring...")
                 if response.status_code == 204:
                     print("--> Done")
                 else:
