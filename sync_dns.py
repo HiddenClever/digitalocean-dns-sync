@@ -146,7 +146,7 @@ def sync_zone(domain_records_url, domain):
                     port = rdata.port
                     data = rdata.target
                 elif rset.rdtype == TXT:
-                    data = " ".join('"{0}"'.format(string) for string in rdata.strings)
+                    data = rdata.to_text()
                 if data:
                     print("--> Data:", data)
 
