@@ -63,7 +63,7 @@ def qualifyName(dnsName, domain):
 
 
 def check_domain(domain_records_url, domain):
-    print("\nChecking DigitalOcean DNS for", domain
+    print("\nChecking DigitalOcean DNS for", domain)
     response = requests.get(domain_records_url, headers=headers)
 
     if response.status_code == 200:
