@@ -255,6 +255,8 @@ if __name__ == '__main__':
                     response = requests.delete(domain_url, headers=headers)
                 except:
                     print("[ERROR] Can't delete", domain_url, ", ignoring...")
+                    continue
+                    
                 if response.status_code == 204:
                     print("--> Done")
                 else:
