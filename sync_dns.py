@@ -124,13 +124,13 @@ def sync_zone(domain_records_url, domain):
                 if rset.rdtype == MX:
                     priority = rdata.preference
                     print("--> Priority:", priority)
-                    if unicode(rdata.exchange) == "@":
+                    if str(rdata.exchange) == "@":
                         data = "%s." % (domain)
                     else:
                         data = "%s.%s." % (rdata.exchange, domain)
                     data = rdata.exchange
                 elif rset.rdtype == CNAME:
-                    if unicode(rdata) == "@":
+                    if str(rdata) == "@":
                         data = "@"
                     else:
                         data = rdata.target
@@ -150,7 +150,7 @@ def sync_zone(domain_records_url, domain):
                 if data:
                     print("--> Data:", data)
 
-                    data = unicode(data)
+                    data = str(data)
                     type = rdatatype.to_text(rset.rdtype)
 
                     # Try and find an existing record
