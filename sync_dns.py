@@ -233,9 +233,9 @@ if __name__ == '__main__':
         delete = False
     if len(args) == 1:
         print("You have not specified a domain, would you like to wipe and re-sync all domains in the system?")
-        sync_all = raw_input("Please type y or n: ")
+        sync_all = input("Please type y or n: ")
         print("Did you run this previously and reach the DigitalOcean API limit?")
-        resume_domain = raw_input("If so type the last domain name here to resume: ")
+        resume_domain = input("If so type the last domain name here to resume: ")
         if sync_all == "y":
             found = False
             for filename in sorted(glob.glob(bindfolder + "*" + bindextension)):
