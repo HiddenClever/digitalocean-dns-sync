@@ -5,7 +5,7 @@
 clear_sync_queue() {
     for job in $(atq | cut -f 1)
     do
-        SCHEDULED=`at -c $job | ack-grep "sync_dns.py $1" | wc -l`
+        SCHEDULED=`at -c $job | ack "sync_dns.py $1" | wc -l`
         if [ "$SCHEDULED" -gt "0" ]
         then
             atrm $job
